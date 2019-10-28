@@ -13,8 +13,8 @@ const { Title } = Typography;
 function App() {
 
   const [chartData, setChartData] = useState([]);
-  const [datasourceFilter, setDatasourceFilter] = useState('');
-  const [campaignFilter, setCampaignFilter] = useState('');
+  const [datasourceFilter, setDatasourceFilter] = useState([]);
+  const [campaignFilter, setCampaignFilter] = useState([]);
 
   const getCSVData = () => {
     csvConv().fromString(csvData)
