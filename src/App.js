@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import * as csvConv from 'csvtojson';
-import csvData from './DAMKBAoDBwoDBAkOBAYFCw';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import { take, uniq, map, filter } from 'lodash';
 import { Select, Typography } from 'antd';
@@ -12,39 +11,10 @@ const { Title } = Typography;
 
 function App() {
 
-  const [chartData, setChartData] = useState([]);
-  const [datasourceFilter, setDatasourceFilter] = useState([]);
-  const [campaignFilter, setCampaignFilter] = useState([]);
 
-  const getCSVData = () => {
-    csvConv().fromString(csvData)
-      .then(csvRow => setChartData(take(csvRow, 100)));
-  };
-
-  const handleChangeDatasource = value => {
-    setDatasourceFilter(value);
-  };
-
-  const handleChangeCampaign = value => {
-    setCampaignFilter(value);
-  };
-
-  const filteredChartData = useCallback(
-    () => {
-      if (chartData.length === 0) return [];
-
-      const filteredByDataSource = datasourceFilter.length === 0 ? chartData : filter(chartData, item => datasourceFilter.includes(item.Datasource));
-      const filteredByCampaignFilter = campaignFilter.length === 0 ? filteredByDataSource: filter(filteredByDataSource, item => campaignFilter.includes(item.Campaign));
-
-      return filteredByCampaignFilter;
-    },
-    [datasourceFilter, campaignFilter, chartData]
-  );
-
-  const getUniqValuesByProperty = (data, propertyName) => uniq(map(data, propertyName));
 
   useEffect(() => {
-    getCSVData();
+    // getCSVData();
   }, []);
   
   return (
